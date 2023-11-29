@@ -50,6 +50,6 @@ Consider these optional enhancements to earn bonus points:
 
 ## Questions and Assistance
 
-If you have any questions or need assistance at any stage of this assessment, please feel free to reach out to info@nugo.lk and methindu@nugo.lk
+If you have any questions or need assistance at any stage of this assessment, please feel free to reach out to info@nugo.lk or methindu@nugo.lk
 
 Best of luck with your assessment!
