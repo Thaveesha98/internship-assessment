@@ -6,6 +6,7 @@ import {
 } from "../features/characters/characterSlice";
 import CharacterCard from "../components/CharacterCard";
 import Pagination from "../components/Pagination";
+import Footer from "../components/Footer";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -37,11 +38,6 @@ const Home = () => {
             <CharacterCard key={character.id} character={character} />
           ))}
         </div>
-        <Pagination
-          currentPage={currentPage}
-          totalPages={info?.pages || 1}
-          onPageChange={handlePageChange}
-        />
       </>
     );
   } else if (characterStatus === "failed") {
@@ -49,9 +45,21 @@ const Home = () => {
   }
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold mb-8">Rick and Morty Characters</h1>
-      {content}
+    <div>
+      <div className="container mx-auto px-4 py-8">
+        <h1 className="text-4xl font-bold mb-8 text-center">
+          Rick and Morty Characters
+        </h1>
+        {content}
+      </div>
+      <div className="flex justify-center max-sm:justify-end m-5 max-sm:w-[80%]">
+        <Pagination
+          currentPage={currentPage}
+          totalPages={info?.pages || 1}
+          onPageChange={handlePageChange}
+        />
+      </div>
+      <Footer />
     </div>
   );
 };
