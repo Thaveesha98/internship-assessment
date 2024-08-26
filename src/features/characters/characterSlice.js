@@ -4,8 +4,11 @@ export const fetchCharacters = createAsyncThunk(
   "characters/fetchCharacters",
   async (page = 1) => {
     const response = await fetch(
-      `https://rickandmortyapi.com/api/character/?page=${page}`
+      `${process.env.REACT_APP_API_URL}/api/character/?page=${page}`
     );
+    if (!response.ok) {
+      throw new Error(`Failed to fetch characters: ${response.statusText}`);
+    }
     const data = await response.json();
     return data;
   }
@@ -18,6 +21,7 @@ const charactersSlice = createSlice({
     status: "idle",
     error: null,
     info: null,
+    page: 1, 
   },
   reducers: {
     setPage: (state, action) => {
