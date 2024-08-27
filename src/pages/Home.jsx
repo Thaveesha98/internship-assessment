@@ -15,16 +15,15 @@ const Home = () => {
   const characterStatus = useSelector((state) => state.characters.status);
   const error = useSelector((state) => state.characters.error);
   const info = useSelector((state) => state.characters.info);
-  const [currentPage, setCurrentPage] = useState(1);
+  const page = useSelector((state) => state.characters.page);
 
   
   useEffect(() => {
-    dispatch(fetchCharacters(currentPage));
-  }, [dispatch, currentPage]);
+    dispatch(fetchCharacters(page));
+  }, [dispatch, page]);
 
   const handlePageChange = (newPage) => {
     if (newPage < 1 || newPage > (info?.pages)) return;
-    setCurrentPage(newPage);
     dispatch(setPage(newPage));
   };
 
@@ -56,7 +55,7 @@ const Home = () => {
       </div>
       <div className="flex justify-center max-sm:justify-end m-5 max-sm:w-[80%]">
         <Pagination
-          currentPage={currentPage}
+          currentPage={page}
           totalPages={info?.pages || 1}
           onPageChange={handlePageChange}
         />

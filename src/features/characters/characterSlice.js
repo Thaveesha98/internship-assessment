@@ -1,18 +1,21 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import {Pending,Fulfilled,Rejected} from '../../constants'
 
+export const fetchCharactersApi = async (page = 1) => {
+  const response = await fetch(
+    `${process.env.REACT_APP_API_URL}/api/character/?page=${page}`
+  );
+  if (!response.ok) {
+    throw new Error(`Failed to fetch characters: ${response.statusText}`);
+  }
+  const data = await response.json();
+  return data;
+};
+
 export const fetchCharacters = createAsyncThunk(
-  "characters/fetchCharacters",
+  'characters/fetchCharacters',
   async (page = 1) => {
-    const response = await fetch(
-      `${process.env.REACT_APP_API_URL}/api/character/?page=${page}`
-    );
-    if (!response.ok) {
-      throw new Error(`Failed to fetch characters: ${response.statusText}`);
-    }
-    const data = await response.json();
-    console.log(data);
-    return data;
+    return await fetchCharactersApi(page);
   }
 );
 
