@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import {Pending,Fulfilled,Rejected} from '../constants'
 import {
   fetchCharacters,
   setPage,
@@ -16,21 +17,22 @@ const Home = () => {
   const info = useSelector((state) => state.characters.info);
   const [currentPage, setCurrentPage] = useState(1);
 
+  
   useEffect(() => {
     dispatch(fetchCharacters(currentPage));
   }, [dispatch, currentPage]);
 
   const handlePageChange = (newPage) => {
-    if (newPage < 1 || newPage > (info?.pages || 1)) return; // Prevent invalid page changes
+    if (newPage < 1 || newPage > (info?.pages)) return;
     setCurrentPage(newPage);
     dispatch(setPage(newPage));
   };
 
   let content;
 
-  if (characterStatus === "loading") {
+  if (characterStatus === Pending) {
     content = <p>Loading...</p>;
-  } else if (characterStatus === "succeeded") {
+  } else if (characterStatus === Fulfilled) {
     content = (
       <>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -40,7 +42,7 @@ const Home = () => {
         </div>
       </>
     );
-  } else if (characterStatus === "failed") {
+  } else if (characterStatus === Rejected) {
     content = <p>Error: {error}</p>;
   }
 

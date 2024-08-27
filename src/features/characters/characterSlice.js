@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import {Pending,Fulfilled,Rejected} from '../../constants'
 
 export const fetchCharacters = createAsyncThunk(
   "characters/fetchCharacters",
@@ -10,6 +11,7 @@ export const fetchCharacters = createAsyncThunk(
       throw new Error(`Failed to fetch characters: ${response.statusText}`);
     }
     const data = await response.json();
+    console.log(data);
     return data;
   }
 );
@@ -31,15 +33,15 @@ const charactersSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchCharacters.pending, (state) => {
-        state.status = "loading";
+        state.status = Pending;
       })
       .addCase(fetchCharacters.fulfilled, (state, action) => {
-        state.status = "succeeded";
+        state.status = Fulfilled;
         state.data = action.payload.results;
         state.info = action.payload.info;
       })
       .addCase(fetchCharacters.rejected, (state, action) => {
-        state.status = "failed";
+        state.status = Rejected;
         state.error = action.error.message;
       });
   },
