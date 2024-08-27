@@ -1,10 +1,10 @@
 import '@testing-library/jest-dom';
-import { fetchCharacters } from './characterSlice';
+import { fetchCharactersApi } from './characterSlice';
 
 
 describe('fetchCharacters', () => {
   it('fetches characters and validates the response structure', async () => {
-    const result = await fetchCharacters();
+    const result = await fetchCharactersApi();
 
     expect(result).toHaveProperty('info');
     expect(result).toHaveProperty('results');
