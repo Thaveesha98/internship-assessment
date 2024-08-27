@@ -1,55 +1,24 @@
-# React.js Assessment
+# Rick and Morty Characters App
 
-## Objective:
+This is a React application that displays characters from the Rick and Morty series. It uses Redux for state management and fetches data from the Rick and Morty API.
 
-The objective of this assignment is to evaluate your skills in fetching data from an external API using React.js, managing the state using Redux, and displaying the fetched data on the main page in the form of cards with character images, names, species and origin.
+## Features
 
-![rickandmortyapi](https://github.com/Nugo-Tech/internship-assessment/assets/64253644/6ec4daaa-0b2e-4e51-994d-676f887123ca)
+- **Character List**: Browse through characters from the Rick and Morty series.
+- **Pagination**: Navigate between different pages of characters.
+- **Error Handling**: Displays error messages in case of issues fetching data.
 
-## Steps to Complete the Assessment
+## Prerequisites
 
-1. **Fork this Repository:** Start by forking this GitHub repository to your own account. You will work on your assessment within your forked repository.
+Before you begin, ensure you have met the following requirements:
 
-2. **Setup the Project:**
+- Node.js 
+- npm or yarn (for package management)
 
-   - Clone your forked repository to your local machine.
-   - Install the necessary dependencies.
+### Key Additions:
+- **Environment Variables Section**: Detailed explanation on how to create and use the `.env` file.
+- **Importance of the `.env` File**: Clarified how the `.env` file is used for managing environment-specific configurations, like the base URL for API requests.
 
-3. **API Integration:** Utilize the Rick and Morty API to fetch character data. https://rickandmortyapi.com/api/character/
+This should help users understand the importance and usage of the `.env` file in your project.
 
-4. **Redux Integration:** Implement Redux to manage the fetched character data centrally and make it available to the main page.
-
-5. **Display Characters as Cards:** Each character should be displayed as a card containing: (Please refer above image)
-
-   - Character Image
-   - Character Name
-   - Species
-   - origin
-
-6. **styling:** Use CSS or any styling framework (Bootstrap, Tailwind CSS or MUI)
-
-7. **Submission:**
-   - Commit your code to your forked repository.
-   - Create a Pull Request from your forked repository to this repository. https://github.com/Nugo-Tech/internship-assessment
-
-## Evaluation Criteria
-
-Your assessment will be evaluated based on the following criteria:
-
-- Correctness of fetching data and Redux intergration.
-- Code readability and organization, including proper use of comments.
-- Use a suitable naming convension.
-
-## Bonus Points (Optional)
-
-Consider these optional enhancements to earn bonus points:
-
-- Deploy the application to a live server.
-- Implement testing for API functionality.
-- Adding Pagination
-
-## Questions and Assistance
-
-If you have any questions or need assistance at any stage of this assessment, please feel free to reach out to info@nugo.lk or methindu@nugo.lk
-
-Best of luck with your assessment!
+Base_Url:https://rickandmortyapi.com

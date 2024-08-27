@@ -1,26 +1,29 @@
-import React from "react";
+import React from 'react';
+import { Pagination as MuiPagination } from '@mui/material';
 
 const Pagination = ({ currentPage, totalPages, onPageChange }) => {
+  const handleChange = (event, value) => {
+    onPageChange(value);
+  };
+
   return (
-    <div className="flex justify-center mt-4">
-      <button
-        onClick={() => onPageChange(currentPage - 1)}
-        disabled={currentPage === 1}
-        className="px-4 py-2 border rounded mr-2"
-        style={{ opacity: currentPage === 1 ? 0.5 : 1 }}
-      >
-        Previous
-      </button>
-      <span className="px-4 py-2">{`Page ${currentPage}`}</span>
-      <button
-        onClick={() => onPageChange(currentPage + 1)}
-        disabled={currentPage === totalPages}
-        className="px-4 py-2 border rounded ml-2"
-        style={{ opacity: totalPages === 1 ? 0.5 : 1 }}
-      >
-        Next
-      </button>
-    </div>
+    <MuiPagination 
+      count={totalPages}
+      page={currentPage}
+      onChange={handleChange}
+      size="large"
+      showFirstButton
+      showLastButton
+      siblingCount={1}
+      boundaryCount={1}
+      sx={{
+        display: 'flex',
+        justifyContent: 'center',
+        marginTop: 4,
+        
+      
+      }}
+    />
   );
 };
 

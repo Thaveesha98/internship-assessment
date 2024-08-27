@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import {Pending,Fulfilled,Rejected} from '../constants'
 import {
   fetchCharacters,
   setPage,
 } from "../features/characters/characterSlice";
 import CharacterCard from "../components/CharacterCard";
 import Pagination from "../components/Pagination";
+import Footer from "../components/Footer";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -15,21 +17,22 @@ const Home = () => {
   const info = useSelector((state) => state.characters.info);
   const [currentPage, setCurrentPage] = useState(1);
 
+  
   useEffect(() => {
     dispatch(fetchCharacters(currentPage));
   }, [dispatch, currentPage]);
 
   const handlePageChange = (newPage) => {
-    if (newPage < 1 || newPage > (info?.pages || 1)) return; // Prevent invalid page changes
+    if (newPage < 1 || newPage > (info?.pages)) return;
     setCurrentPage(newPage);
     dispatch(setPage(newPage));
   };
 
   let content;
 
-  if (characterStatus === "loading") {
+  if (characterStatus === Pending) {
     content = <p>Loading...</p>;
-  } else if (characterStatus === "succeeded") {
+  } else if (characterStatus === Fulfilled) {
     content = (
       <>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -37,21 +40,28 @@ const Home = () => {
             <CharacterCard key={character.id} character={character} />
           ))}
         </div>
+      </>
+    );
+  } else if (characterStatus === Rejected) {
+    content = <p>Error: {error}</p>;
+  }
+
+  return (
+    <div>
+      <div className="container mx-auto px-4 py-8">
+        <h1 className="text-4xl font-bold mb-8 text-center">
+          Rick and Morty Characters
+        </h1>
+        {content}
+      </div>
+      <div className="flex justify-center max-sm:justify-end m-5 max-sm:w-[80%]">
         <Pagination
           currentPage={currentPage}
           totalPages={info?.pages || 1}
           onPageChange={handlePageChange}
         />
-      </>
-    );
-  } else if (characterStatus === "failed") {
-    content = <p>Error: {error}</p>;
-  }
-
-  return (
-    <div className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold mb-8">Rick and Morty Characters</h1>
-      {content}
+      </div>
+      <Footer />
     </div>
   );
 };
